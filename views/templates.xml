@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="clients_page" name="topnet clients">
+        <t t-call="website.layout">
+            <div class="container">
+                Hey Subscribe the channel .. !
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <td>
+                                Name
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="client" t-as="client">
+                            <tr>
+                                <td>
+                                     <t t-esc="topnet.clt_name"/>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+
+            </div>
+        </t>
+    </template>
+
+</odoo>
+
