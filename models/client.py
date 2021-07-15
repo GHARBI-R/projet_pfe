@@ -1,4 +1,5 @@
-from odoo import fields, models
+from odoo import fields, models, api, _
+
 from odoo.exceptions import ValidationError
 
 
@@ -7,8 +8,9 @@ class Client(models.Model):
     _inherit = ['mail.thread.cc', 'mail.activity.mixin']
     _description = 'Client'
     _rec_name= 'npg'
-     
 
+    name_seq = fields.Char(string='Client ID', required=True, copy=False, readonly=True,
+                           index=True, default=lambda self: _('New'))
     npg= fields.Char('Nom et prénom du gérant ', required= True)
     cin = fields.Integer('CIN / passeport ', required= True)
     raison= fields.Char('Raison sociale', required= True)
@@ -26,6 +28,7 @@ class Client(models.Model):
     ville_ins = fields.Integer('Ville', required=True)
     code_postal_ins = fields.Integer('Code_postal', required=True)
 
+
     #contact_id= fields.One2many('topnet.contact','clt_id')
 
 
@@ -37,4 +40,9 @@ class Client(models.Model):
     active = fields.Boolean(default=True)
 
 
-
+    @api.model
+    def create(self, vals):
+      if vals.get('name_seq', _('New')) == _('New'):
+        vals['name_seq'] = self.env['ir.sequence'].next_by_code('topnet.client.sequence') or _('New')
+      result = super(Client, self).create(vals)
+      return result

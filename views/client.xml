@@ -9,6 +9,7 @@
             <tree string="Patients">
               <field name="cin" string="cin"/>
               <field name="npg"/>
+              <field name="name_seq"/>
               <field name="raison"/>
               <field name="registre"/>
               <field name="code_TVA"/>
@@ -35,6 +36,11 @@
                </div>
             </header>   
             <sheet>
+                 <div class="oe_title">
+                        <h1>
+                            <field name="name_seq" readonly="1"/>
+                        </h1>
+                    </div>
              <group>
               
             <group>
